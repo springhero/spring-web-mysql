@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title>Spring Framework</title>
+
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+<div class="container">
+    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+    <div th:if="${not #lists.isEmpty(users)}">
+        <h2>Product List</h2>
+        <table class="table table-striped">
+            <tr>
+                <th>User Id</th>
+                <th>Role</th>
+                <th>View</th>
+                <th>Edit</th>
+            </tr>
+            <tr th:each="user : ${users}">
+               <tr th:each="roleObj : ${user.roles}">
+                <td th:text="${user.id}"><a href="/user/${user.id}">User Id</a></td>
+                <td th:text="${user.userName}"><a href="/user/${user.id}">User Name</a></td>
+                <td th:text="${roleObj.role}">Roles</td>
+                <td><a th:href="${ '/user/' + user.id}">View</a></td>
+                <td><a th:href="${'/user/edit/'+user.id}">Edit</a></td>
+               </tr>
+            </tr>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
